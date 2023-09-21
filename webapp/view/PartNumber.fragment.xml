@@ -1,0 +1,38 @@
+
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog  title="Part Number List" contentHeight="250px" contentWidth="400px">
+        <content>
+            <Table id="partNumTable"  mode="SingleSelect" noDataText="No Exception Found" items="{PartNumberModel>/PartNumberModelSet}">
+                
+                
+                <ColumnListItem >
+                    <cells>
+                        <Text text="{PartNumberModel>Matnr}" />
+                        <Text text="{PartNumberModel>Maktg}" />
+                        
+                        
+                    </cells>
+                </ColumnListItem>
+                <columns>
+                    <Column>
+                        <header>
+                            <Label design="Bold" text="Part Number ID" />
+                        </header>
+                    </Column>
+                    <Column >
+                        <header>
+                            <Label text="Part Number Description" design="Bold"/>
+                        </header>
+                    </Column>
+                    
+                </columns>
+            </Table>
+        </content>
+        <beginButton>
+            <Button text="OK" press="onPressOkButton"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press="onPressCancelButton"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

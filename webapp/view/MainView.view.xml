@@ -1,0 +1,86 @@
+<mvc:View controllerName="com.parker.zhsdrepack.controller.MainView"
+    height="100%"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:ui="sap.ca.ui"
+		displayBlock="true">
+	<semantic:FullscreenPage id="semanticPage" title="HSD Repack" showNavButton="false" navButtonPress="onNavButtonPress">
+		<semantic:content>
+        
+			<f:SimpleForm title="Delivery Details" id="deliveryDetailsForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+            
+					<Label id="lblPartNumber" class="sapUiNoContentPadding" text="Part Number"></Label>
+					<Input id="inpPartNumber"  class="sapUiNoContentPadding" valueHelpRequest="showPartNumberValueHelp" showValueHelp="true" placeholder="Enter Part Number" width="50%"></Input>
+					<Label id="lblQty"  class="sapUiNoContentPadding" text="Quantity"></Label>
+                    
+					<Input id="inpQty"  class="sapUiNoContentPadding" width="50%" placeholder="Enter Quantity" >
+                     <layoutData>
+                     
+                     <FlexItemData alignSelf="Start" id="_IDGenFlexItemData1" growFactor="1"></FlexItemData></layoutData>
+                    </Input>
+                    <Text id="qtyText" text="EA"/>
+                    
+					<Label id="lblBatch" class="sapUiNoContentPadding"  text="Batch"></Label>
+					<Input id="inpBatch"  class="sapUiNoContentPadding" placeholder="Enter Batch"  width="50%"></Input>
+					<Label id="lblDelivery" class="sapUiNoContentPadding"  text="Delivery"></Label>
+					<Input id="inpDelivery"  class="sapUiNoContentPadding" placeholder="Enter Delivery Number"  width="50%"></Input>
+				</f:content>
+			</f:SimpleForm>
+            <f:SimpleForm visible="false"   title="Repacking Details" id="repackingDetailsForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+            
+					<Label id="lblContainer" class="sapUiNoContentPadding" text="Container"></Label>
+					<Input id="inpContainer"  class="sapUiNoContentPadding"  value="{rePackModel>/ContType}" width="50%"></Input>
+                    <Label id="lblCtrQty"  class="sapUiNoContentPadding" text="Container Quantity"></Label>
+					<Input id="inpCtrQty"  value="{rePackModel>/ContQty}" width="50%" class="sapUiNoContentPadding" />
+					<Label id="lblQtyCtr"  class="sapUiNoContentPadding" text="Quantity per Container"></Label>
+					<Input id="inpQtyCtr"  value="{rePackModel>/QtyPerCont}" class="sapUiNoContentPadding" width="50%" >
+                     <layoutData><FlexItemData id="_IDGenFlexItemData2" growFactor="1"></FlexItemData></layoutData>
+                    </Input>
+                    <Text id="qtyRepackingText" text="EA"/>
+					<Label id="lblStep1" class="sapUiNoContentPadding"  text="Step 1"></Label>
+					<Input id="inpStep1"  class="sapUiNoContentPadding" value="{rePackModel>/Step1}" width="70%"></Input>
+                    <Label id="lblStep2" class="sapUiNoContentPadding"  text="Step 2"></Label>
+					<Input id="inpStep2"  class="sapUiNoContentPadding" value="{rePackModel>/Step2}" width="70%"></Input>
+                    <Label id="lblStep3" class="sapUiNoContentPadding"  text="Step 3"></Label>
+					<Input id="inpStep3"  class="sapUiNoContentPadding" value="{rePackModel>/Step3}" width="70%"></Input>
+                    <Label id="lblStep4" class="sapUiNoContentPadding"  text="Step 4"></Label>
+					<Input id="inpStep4"  class="sapUiNoContentPadding" value="{rePackModel>/Step4}" width="70%"></Input>
+                    <Label id="lblStep5" class="sapUiNoContentPadding"  text="Step 5"></Label>
+					<Input id="inpStep5"  class="sapUiNoContentPadding" value="{rePackModel>/Step5}" width="70%"></Input>
+					
+				</f:content>
+			</f:SimpleForm>
+            <f:SimpleForm visible="false"  title="Printing Details" id="printingDetailsForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+            
+					<Label id="lblTotalLabelsPrinted" class="sapUiNoContentPadding" text="Total Labels Printed"></Label>
+					<Input id="inpTotalLabelsPrinted"  value="{rePackModel>/Step2}" class="sapUiNoContentPadding"  width="50%"></Input>
+					<Label id="lblPerContainer"  class="sapUiNoContentPadding" text="Labels per Container"></Label>
+					<Input id="inpPerContainer"  value="{rePackModel>/LabelsPerCont}" class="sapUiNoContentPadding" width="50%" placeholder="Enter Quantity" ></Input>
+                    
+					<Label id="lblMasterLabelPrinted" class="sapUiNoContentPadding"  text="Master Label Printed"></Label>
+					<Input id="inpMasterLabelPrinted"  value="{rePackModel>/MasterLabels}" class="sapUiNoContentPadding"   width="50%"></Input>
+					
+				</f:content>
+			</f:SimpleForm>
+            
+		</semantic:content>
+		<semantic:customFooterContent>
+			<Button id="setRestart" visible="false" text="Restart" type="Accept" press="onRestart"/>
+            <Button id="setPrinterbtn" visible="false" text="Print" type="Accept" press="onPrint"/>
+			<Button id="crtWarehousebtn" visible="false" text="Create" type="Accept" press="onCreateWareHouseTask" />
+            <Button id="execbtn" text="Execute" type="Accept" press="onExecutePress"/>
+		</semantic:customFooterContent>
+	</semantic:FullscreenPage>
+</mvc:View>
