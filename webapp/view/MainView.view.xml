@@ -16,10 +16,12 @@
 				<f:content>
             
 					<Label id="lblPartNumber" class="sapUiNoContentPadding" text="Part Number"></Label>
-					<Input id="inpPartNumber"  class="sapUiNoContentPadding" valueHelpRequest="showPartNumberValueHelp" showValueHelp="true" placeholder="Enter Part Number" width="50%"></Input>
+					<Input id="inpPartNumber" required="true" class="sapUiNoContentPadding" valueHelpRequest="showPartNumberValueHelp" showValueHelp="true" placeholder="Enter Part Number" width="50%"></Input>
+					<Label id="lblDelivery" class="sapUiNoContentPadding"  text="Delivery"></Label>
+					<Input id="inpDelivery"  required="true" class="sapUiNoContentPadding" placeholder="Enter Delivery Number"  width="50%"></Input>
 					<Label id="lblQty"  class="sapUiNoContentPadding" text="Quantity"></Label>
                     
-					<Input id="inpQty"  class="sapUiNoContentPadding" width="50%" placeholder="Enter Quantity" >
+					<Input id="inpQty"  value="{rePackModel>/Qty}" enabled="false" class="sapUiNoContentPadding" width="50%"  >
                      <layoutData>
                      
                      <FlexItemData alignSelf="Start" id="_IDGenFlexItemData1" growFactor="1"></FlexItemData></layoutData>
@@ -28,8 +30,7 @@
                     
 					<Label id="lblBatch" class="sapUiNoContentPadding"  text="Batch"></Label>
 					<Input id="inpBatch"  class="sapUiNoContentPadding" placeholder="Enter Batch"  width="50%"></Input>
-					<Label id="lblDelivery" class="sapUiNoContentPadding"  text="Delivery"></Label>
-					<Input id="inpDelivery"  class="sapUiNoContentPadding" placeholder="Enter Delivery Number"  width="50%"></Input>
+					
 				</f:content>
 			</f:SimpleForm>
             <f:SimpleForm visible="false"   title="Repacking Details" id="repackingDetailsForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
@@ -38,9 +39,9 @@
 				<f:content>
             
 					<Label id="lblContainer" class="sapUiNoContentPadding" text="Container"></Label>
-					<Input id="inpContainer"  class="sapUiNoContentPadding"  value="{rePackModel>/ContType}" width="50%"></Input>
+					<Input id="inpContainer"  enabled="false" class="sapUiNoContentPadding"  value="{rePackModel>/ContType}" width="50%"></Input>
                     <Label id="lblCtrQty"  class="sapUiNoContentPadding" text="Container Quantity"></Label>
-					<Input id="inpCtrQty"  value="{rePackModel>/ContQty}" width="50%" class="sapUiNoContentPadding" />
+					<Input id="inpCtrQty"  enabled="false" value="{rePackModel>/ContQty}" width="50%" class="sapUiNoContentPadding" />
 					<Label id="lblQtyCtr"  class="sapUiNoContentPadding" text="Quantity per Container"></Label>
 					<Input id="inpQtyCtr"  value="{rePackModel>/QtyPerCont}" class="sapUiNoContentPadding" width="50%" >
                      <layoutData><FlexItemData id="_IDGenFlexItemData2" growFactor="1"></FlexItemData></layoutData>

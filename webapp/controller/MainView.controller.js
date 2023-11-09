@@ -62,6 +62,8 @@ sap.ui.define([
             onRestart: function(){
                 this.getView().byId("repackingDetailsForm").setVisible(false);
                 this.getView().byId("printingDetailsForm").setVisible(false);
+                this.getView().byId("crtWarehousebtn").setVisible(false);
+                this.getView().byId("setPrinterbtn").setVisible(false);
                 this.getView().byId("inpPartNumber").setValue("");
                 this.getView().byId("inpQty").setValue("");
                 this.getView().byId("inpBatch").setValue("");
@@ -70,10 +72,11 @@ sap.ui.define([
                 this.getView().byId("setPrinterbtn").setText("Print");
             },
             onCreateWareHouseTask: function(){
+                this.payloadData.Refdoc = this.getView().byId("inpDelivery").getValue();
                 this.oDataModel.create("/RepackInstructionsSet", this.payloadData, {
 
                     success: function (oData) {
-                        MessageBox.success("Warehouse Task created successfully");
+                        MessageBox.success(oData.Message);
 
                     },
                     error: function (oError) {
@@ -82,12 +85,26 @@ sap.ui.define([
                     }
                 });
             },
+            checkMandatoryField: function(){
+                this.bflag = false;
+                var partNumber = this.getView().byId("inpPartNumber").getValue();
+                var deliveryNumber = this.getView().byId("inpDelivery").getValue();
+
+                if((partNumber === "") || (deliveryNumber === "")){
+                    MessageBox.error("Kindly Enter Part Number or Delivery Number");
+                    this.bflag = true;
+                }
+                
+            },
             onExecutePress: function(){
                 var that = this;
+                this.checkMandatoryField();
                 this.payloadData={};
                 this.partNumber= this.getView().byId("inpPartNumber").getValue();
                 this.qty = this.getView().byId("inpQty").getValue();
-                this.oDataModel.read("/RepackInstructionsSet(Qty='"+ this.qty +"',Matnr='" +this.partNumber+"')", {
+                this.Refdoc = this.getView().byId("inpDelivery").getValue();
+                if(!(this.bflag)){
+                this.oDataModel.read("/RepackInstructionsSet(Matnr='"+ this.partNumber +"',Refdoc='"+ this.Refdoc + "')", {
 				
                     success: function (oData) {
                         console.log(oData);
@@ -96,9 +113,11 @@ sap.ui.define([
                         rePackModel.setData(oData);
                         that.getView().byId("repackingDetailsForm").setModel(rePackModel,"rePackModel");
                         that.getView().byId("printingDetailsForm").setModel(rePackModel,"rePackModel");
+                        that.getView().byId("deliveryDetailsForm").setModel(rePackModel,"rePackModel");
                         that.getView().byId("setRestart").setVisible(true);
                        if(oData.Message === "No Special Packaging Instructions Exist for this Part"){
                         sap.m.MessageToast.show(oData.Message);
+                        that.getView().byId("repackingDetailsForm").setVisible(true);
                         // that.getView().byId("printingDetailsForm").setVisible(true);
                         that.getView().byId("setPrinterbtn").setVisible(true);
                         that.getView().byId("crtWarehousebtn").setVisible(true);
@@ -115,6 +134,7 @@ sap.ui.define([
     
                     }
                 });
+            }
             }
         });
     });

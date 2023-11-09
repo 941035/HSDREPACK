@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
 
-specVersion: "2.5"
+specVersion: "3.1"
 metadata:
   name: com.parker.zhsdrepack
 type: application
@@ -14,10 +14,10 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          destination: DEWDEV
-          url: http://parkerdewvm:8001
+          destination: DW1
+          url: http://parkerdw1vm:8001
         app:
           name: ZHSDREPACK
-          description: HSD REPACK
+          description: HSD Repack
           package: ZFIORI
-          transport: DEWK901073
+          transport: DW1K900046
